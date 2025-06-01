@@ -1,0 +1,59 @@
+<!-- <?php -->
+<!-- // Include config file for database connection
+require_once "config.php"; -->
+
+<!-- // Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Collect form data
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
+
+    // Simple validation (add more if needed)
+    if (empty($name) || empty($email) || empty($subject) || empty($message)) {
+        echo 'All fields are required!';
+        exit;
+    }
+
+    // Create a database connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Prepare the SQL query
+    $sql = "INSERT INTO tblcontactlee(name, email, subject, message) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+
+    // Check if prepare() failed
+    if ($stmt === false) {
+        // Output the error message from MySQL
+        die(" preparing the SQL query: " . $conn->error);
+    }
+
+    // Bind parameters
+    $bind_result = $stmt->bind_param("ssss", $name, $email, $subject, $message);
+
+    // Check if bind_param() failed
+    if (!$bind_result) {
+        die(" binding parameters: " . $stmt->error);
+    }
+
+    // Execute the query
+    $execute_result = $stmt->execute();
+
+    // Check if execute() failed
+    if ($execute_result) {
+        echo 'Your message has been received. Thank you!';
+    } else {
+        echo 'There was an error saving your message: ' . $stmt->error;
+    }
+
+    // Close the prepared statement and connection
+    $stmt->close();
+    $conn->close(); -->
+<!-- }
+?> -->
